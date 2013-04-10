@@ -1,8 +1,13 @@
 from django.db import models
 from django.template import Template
-from django.util.text import slugify
+try:
+    from django.utils.text import slugify
+except ImportError:
+    from django.template.defaultfilters import slugify
+
 
 from . import email
+from . import utils
 
 
 class NamedSlugMixin(object):
@@ -35,11 +40,22 @@ class ReceipientList(NamedSlugMixin, models.Model):
             r.send(blast)
 
 
-class DailyEmailBlast(NamedSlugMixin, models.Model):
+class DailyEmailBlastType(NamedSlugMixin, models.Model):
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+
+class DailyEmailBlast(models.Model):
+    blast_type = models.ForeignKey(DailyEmailBlastType, related_name='blasts')
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     receipient_lists = models.ManyToManyField(ReceipientList,
             related_name='blasts')
+
+    def __unicode__(self):
+        return u'%s (%s)' % (self.blast_type, self.created_on)
 
     def send(self):
         for l in self.receipient_lists.all():
@@ -51,14 +67,6 @@ class DailyEmailBlast(NamedSlugMixin, models.Model):
             'receipient_list': receipient_list,
             'blast': self,
         }
-        t = Template(get_template_names(self, receipient_list, receipient))
+        t = Template(utils.get_template_names(self, receipient_list,
+                receipient))
         return t.render(context)
-
-
-def get_template_names(blast, receipient_list, receipient):
-    return [
-        'tt_dailyemailblast/%s/%s/%s.html' % (blast.slug, receipient_list.slug,
-                receipient.slug),
-        'tt_dailyemailblast/%s/%s.html' % (blast.slug, receipient_list.slug),
-        'tt_dailyemailblast/%s.html' % blast.slug,
-    ]
