@@ -1,3 +1,4 @@
+from armstrong.utils.backends import GenericBackend
 from django.db import models
 from django.template import Template
 try:
@@ -68,8 +69,6 @@ class DailyEmailBlast(models.Model):
         return t.render(context)
 
     def get_context_data(self, receipient, receipient_list):
-        return {
-            'receipient': receipient,
-            'receipient_list': receipient_list,
-            'blast': self,
-        }
+        context_backend = GenericBackend('TT_DAILYEMAILBLAST_CONTEXT',
+                defaults=['tt_dailyemailblast.context_backend.basic'])
+        return context_backend(self, receipient, receipient_list)
