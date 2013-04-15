@@ -62,11 +62,14 @@ class DailyEmailBlast(models.Model):
             l.send(self)
 
     def render(self, receipient, receipient_list):
-        context = {
+        context = self.get_context_data(receipient, receipient_list)
+        t = Template(utils.get_template_names(self, receipient_list,
+                receipient))
+        return t.render(context)
+
+    def get_context_data(self, receipient, receipient_list):
+        return {
             'receipient': receipient,
             'receipient_list': receipient_list,
             'blast': self,
         }
-        t = Template(utils.get_template_names(self, receipient_list,
-                receipient))
-        return t.render(context)
