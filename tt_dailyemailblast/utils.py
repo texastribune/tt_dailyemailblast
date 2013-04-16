@@ -11,5 +11,5 @@ def get_template_names(blast, receipient_list, receipient):
     ]
 
 
-def dispatch_to_backend(obj, backend, default):
-    GenericBackend(backend, defaults=[default, ])(obj)
+def dispatch_to_backend(backend, default, *args):
+    GenericBackend(backend, defaults=[default, ])(*args)

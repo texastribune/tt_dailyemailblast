@@ -25,10 +25,10 @@ class Receipient(NamedSlugMixin, models.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.email)
 
-    def send(self):
-        utils.dispatch_to_backend(self,
-                'TT_DAILYEMAILBLAST_RECEIPIENT',
-                'tt_dailyemailblast.send_backends.sync_receipient')
+    def send(self, receipient_list, blast):
+        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECEIPIENT',
+                'tt_dailyemailblast.send_backends.sync_receipient',
+                self, receipient_list, blast)
 
 
 class ReceipientList(NamedSlugMixin, models.Model):
@@ -38,10 +38,10 @@ class ReceipientList(NamedSlugMixin, models.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.receipients.count())
 
-    def send(self):
-        utils.dispatch_to_backend(self,
-                'TT_DAILYEMAILBLAST_RECEIPIENTLIST',
-                'tt_dailyemailblast.send_backends.sync_receipientlist')
+    def send(self, blast):
+        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECEIPIENTLIST',
+                'tt_dailyemailblast.send_backends.sync_receipientlist',
+                self, blast)
 
 
 class DailyEmailBlastType(NamedSlugMixin, models.Model):
@@ -62,9 +62,9 @@ class DailyEmailBlast(models.Model):
         return u'%s (%s)' % (self.blast_type, self.created_on)
 
     def send(self):
-        utils.dispatch_to_backend(self,
-                'TT_DAILYEMAILBLAST_BLASTBACKEND',
-                'tt_dailyemailblast.send_backends.sync_dailyemailblasts')
+        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_BLASTBACKEND',
+                'tt_dailyemailblast.send_backends.sync_dailyemailblasts',
+                self)
 
     def render(self, receipient, receipient_list):
         context = self.get_context_data(receipient, receipient_list)
