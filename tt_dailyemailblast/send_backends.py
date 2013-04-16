@@ -5,7 +5,7 @@ def sync_dailyemailblasts(blast):
 
 def sync_receipientlist(receipient_list, blast):
     for r in receipient_list.receipients.all():
-        r.send(blast)
+        r.send(receipient_list, blast)
 
 
 def sync_receipient(receipient, receipient_list, blast):
