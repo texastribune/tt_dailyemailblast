@@ -7,7 +7,6 @@ except ImportError:
     from django.template.defaultfilters import slugify
 
 
-from . import email
 from . import utils
 
 
