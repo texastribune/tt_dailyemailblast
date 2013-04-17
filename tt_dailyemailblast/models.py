@@ -25,7 +25,7 @@ class Receipient(NamedSlugMixin, models.Model):
         return u'%s (%s)' % (self.name, self.email)
 
     def send(self, recipient_list, blast):
-        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECEIPIENT',
+        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECIPIENT',
                 'tt_dailyemailblast.send_backends.sync.recipient',
                 self, recipient_list, blast)
 
@@ -38,7 +38,7 @@ class ReceipientList(NamedSlugMixin, models.Model):
         return u'%s (%s)' % (self.name, self.recipients.count())
 
     def send(self, blast):
-        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECEIPIENTLIST',
+        utils.dispatch_to_backend('TT_DAILYEMAILBLAST_RECIPIENTLIST',
                 'tt_dailyemailblast.send_backends.sync.recipient_list',
                 self, blast)
 
