@@ -32,15 +32,15 @@ def async_recipients_list(recipients_list, blast):
     send_recipients_list.apply_async(args=[recipients_list.pk, blast.pk])
 
 
-def sync_recipients(recipients, recipients_list, blast):
-    email.send_email(blast.render(recipients, recipients_list))
+def sync_recipient(recipient, recipients_list, blast):
+    email.send_email(blast.render(recipient, recipients_list))
 
 
-def async_recipients(recipients, recipients_list, blast):
+def async_recipient(recipient, recipients_list, blast):
     try:
-        from .tasks import send_recipients
+        from .tasks import send_recipient
     except ImportError, e:
         msg = _(u"Please install Celery before using the async backend: %s" % e)
         raise ImproperlyConfigured(msg)
-    send_recipients.apply_async(args=[recipients.pk, recipients_list.pk,
+    send_recipient.apply_async(args=[recipient.pk, recipients_list.pk,
             blast.pk])

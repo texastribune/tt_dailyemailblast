@@ -22,4 +22,4 @@ def send_recipients(recipient_pk, recipients_list_pk, blast_pk):
     blast = models.DailyEmailBlast.objects.get(pk=blast_pk)
     recipients_list = models.ReceipientList.objects.get(pk=recipients_list_pk)
     recipient = models.Receipient.objects.get(pk=recipient_pk)
-    send_backends.sync_recipients(recipient, recipients_list, blast)
+    send_backends.sync_recipient(recipient, recipients_list, blast)
