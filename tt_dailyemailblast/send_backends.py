@@ -1,9 +1,9 @@
-def sync_dailyemailblasts(blast):
+def sync_daily_email_blasts(blast):
     for l in blast.recipients_lists.all():
         l.send(blast)
 
 
-def sync_recipientslist(recipients_list, blast):
+def sync_recipients_list(recipients_list, blast):
     for r in recipients_list.recipientss.all():
         r.send(recipients_list, blast)
 
