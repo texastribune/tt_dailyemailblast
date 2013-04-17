@@ -1,3 +1,6 @@
+from . import email
+
+
 def sync_daily_email_blasts(blast):
     for l in blast.recipients_lists.all():
         l.send(blast)
