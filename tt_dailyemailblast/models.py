@@ -56,7 +56,7 @@ class DailyEmailBlast(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     recipient_lists = models.ManyToManyField(RecipientList,
-            related_name='blasts')
+            related_name='blasts', editable=False)
 
     def __unicode__(self):
         return u'%s (%s)' % (self.blast_type, self.created_on)
