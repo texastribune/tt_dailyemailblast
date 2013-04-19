@@ -1,12 +1,12 @@
 from armstrong.utils.backends import GenericBackend
 
 
-def get_template_names(blast, receipient_list, receipient):
+def get_template_names(blast, recipient_list, recipient):
     return [
         'tt_dailyemailblast/%s/%s/%s.html' % (blast.blast_type.slug,
-                receipient_list.slug, receipient.slug),
+                recipient_list.slug, recipient.slug),
         'tt_dailyemailblast/%s/%s.html' % (blast.blast_type.slug,
-                receipient_list.slug),
+                recipient_list.slug),
         'tt_dailyemailblast/%s.html' % blast.blast_type.slug,
     ]
 

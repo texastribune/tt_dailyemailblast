@@ -13,13 +13,13 @@ def send_daily_email_blasts(blast_pk):
 @task
 def send_recipients_list(recipients_list_pk, blast_pk):
     blast = models.DailyEmailBlast.objects.get(pk=blast_pk)
-    recipients_list = models.ReceipientList.objects.get(pk=recipients_list_pk)
+    recipients_list = models.RecipientList.objects.get(pk=recipients_list_pk)
     send_backends.sync_recipients_list(recipients_list, blast)
 
 
 @task
 def send_recipients(recipient_pk, recipients_list_pk, blast_pk):
     blast = models.DailyEmailBlast.objects.get(pk=blast_pk)
-    recipients_list = models.ReceipientList.objects.get(pk=recipients_list_pk)
-    recipient = models.Receipient.objects.get(pk=recipient_pk)
+    recipients_list = models.RecipientList.objects.get(pk=recipients_list_pk)
+    recipient = models.Recipient.objects.get(pk=recipient_pk)
     send_backends.sync_recipient(recipient, recipients_list, blast)

@@ -1,6 +1,6 @@
-def basic(blast, receipient, receipient_list):
+def basic(blast, recipient, recipient_list):
     return {
         'blast': blast,
-        'receipient': receipient,
-        'receipient_list': receipient_list,
+        'recipient': recipient,
+        'recipient_list': recipient_list,
     }

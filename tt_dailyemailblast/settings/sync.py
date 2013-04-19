@@ -2,7 +2,7 @@ TT_DAILYEMAILBLAST_RECIPIENT = [
     'tt_dailyemailblast.send_backends.sync.recipient',
 ]
 
-TT_DAILYEMAILBLAST_RECEIPIENTLIST = [
+TT_DAILYEMAILBLAST_RECIPIENTLIST = [
     'tt_dailyemailblast.send_backends.sync.recipient_list',
 ]
 

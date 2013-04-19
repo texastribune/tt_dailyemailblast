@@ -16,7 +16,7 @@ class NamedSlugMixin(object):
         return slugify(self.name)
 
 
-class Receipient(NamedSlugMixin, models.Model):
+class Recipient(NamedSlugMixin, models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     active = models.BooleanField(default=True)
@@ -30,9 +30,10 @@ class Receipient(NamedSlugMixin, models.Model):
                 self, recipient_list, blast)
 
 
-class ReceipientList(NamedSlugMixin, models.Model):
+class RecipientList(NamedSlugMixin, models.Model):
     name = models.CharField(max_length=255)
-    recipients = models.ManyToManyField(Receipient, related_name='lists')
+    recipients = models.ManyToManyField(Recipient, related_name='lists',
+                                        editable=False)
 
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.recipients.count())
@@ -54,7 +55,7 @@ class DailyEmailBlast(models.Model):
     blast_type = models.ForeignKey(DailyEmailBlastType, related_name='blasts')
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
-    recipient_lists = models.ManyToManyField(ReceipientList,
+    recipient_lists = models.ManyToManyField(RecipientList,
             related_name='blasts')
 
     def __unicode__(self):
