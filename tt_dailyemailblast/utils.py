@@ -12,4 +12,9 @@ def get_template_names(blast, recipient_list, recipient):
 
 
 def dispatch_to_backend(backend, default, *args):
-    GenericBackend(backend, defaults=[default, ])(*args)
+    """Configure a GenericBackend and call it with `*args`.
+
+    :param backend: Django setting name for the backend.
+    :param default: Module path to the default backend.
+    """
+    GenericBackend(backend, defaults=[default, ]).get_backend()(*args)
