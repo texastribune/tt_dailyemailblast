@@ -12,7 +12,7 @@ def async_daily_email_blasts(blast):
     tasks.send_daily_email_blasts.apply_async(args=[blast.pk])
 
 
-def async_recipients_list(recipients_list, blast):
+def async_recipient_list(recipients_list, blast):
     tasks.send_recipients_list.apply_async(args=[recipients_list.pk, blast.pk])
 
 
