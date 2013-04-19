@@ -1,11 +1,11 @@
 TT_DAILYEMAILBLAST_RECIPIENT = [
-    'tt_dailyemailblast.send_backends.sync.recipient',
+    'tt_dailyemailblast.send_backends.sync.sync_recipient',
 ]
 
 TT_DAILYEMAILBLAST_RECIPIENTLIST = [
-    'tt_dailyemailblast.send_backends.sync.recipient_list',
+    'tt_dailyemailblast.send_backends.sync.sync_recipient_list',
 ]
 
 TT_DAILYEMAILBLAST_BLASTBACKEND = [
-    'tt_dailyemailblast.send_backends.sync.daily_email_blasts',
+    'tt_dailyemailblast.send_backends.sync.sync_daily_email_blasts',
 ]
