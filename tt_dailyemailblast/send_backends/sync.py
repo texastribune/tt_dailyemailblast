@@ -1,4 +1,4 @@
-from . import email
+from .. import email
 
 
 def sync_daily_email_blasts(blast):
