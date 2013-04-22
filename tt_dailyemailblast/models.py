@@ -1,6 +1,8 @@
 from armstrong.utils.backends import GenericBackend
 from django.db import models
-from django.template import Context, Template
+from django.template import Context
+from django.template.loader import select_template
+
 try:
     from django.utils.text import slugify
 except ImportError:
@@ -70,10 +72,11 @@ class DailyEmailBlast(models.Model):
             self)
 
     def render(self, recipient, recipient_list):
-        t = Template(utils.get_template_names(self, recipient_list, recipient))
+        templates = utils.get_template_names(self, recipient_list, recipient)
+        template = select_template(templates)
         context_data = self.get_context_data(recipient, recipient_list)
         context = Context(context_data)
-        return t.render(context)
+        return template.render(context)
 
     def get_context_data(self, recipient, recipient_list):
         context_backend = GenericBackend('TT_DAILYEMAILBLAST_CONTEXT',
