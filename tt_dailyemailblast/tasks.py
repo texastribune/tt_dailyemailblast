@@ -18,7 +18,7 @@ def send_recipients_list(recipients_list_pk, blast_pk):
 
 
 @task
-def send_recipients(recipient_pk, recipients_list_pk, blast_pk):
+def send_recipient(recipient_pk, recipients_list_pk, blast_pk):
     blast = models.DailyEmailBlast.objects.get(pk=blast_pk)
     recipients_list = models.RecipientList.objects.get(pk=recipients_list_pk)
     recipient = models.Recipient.objects.get(pk=recipient_pk)
