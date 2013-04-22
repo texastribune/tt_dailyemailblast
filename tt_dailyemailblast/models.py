@@ -77,5 +77,5 @@ class DailyEmailBlast(models.Model):
 
     def get_context_data(self, recipient, recipient_list):
         context_backend = GenericBackend('TT_DAILYEMAILBLAST_CONTEXT',
-                defaults=['tt_dailyemailblast.context_backend.basic'])
+                defaults=['tt_dailyemailblast.context_backends.basic'])
         return context_backend(self, recipient, recipient_list)
