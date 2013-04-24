@@ -24,6 +24,6 @@ def sync_recipient(recipient, recipients_list, blast):
     subject = blast.blast_type.name  # ???
     bodies = {'html': html, 'text': ''}  # ???
     to = (recipient.email,)
-    from_email = settings.DEFAULT_FROM_EMAIL  # ???
+    from_email = settings.TT_DAILYEMAILBLAST_FROMEMAIL
     headers = {}  # ???
     email.send_email(subject, bodies, from_email, to, headers)
