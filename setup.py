@@ -27,7 +27,7 @@ for dirpath, dirnames, filenames in os.walk('tt_dailyemailblast'):
 
 setup(
     name='tt_dailyemailblast',
-    version='0.1.0',
+    version='0.1.1',
     description='Texas Tribune: tt_dailyemailblast',
     author='Tribune Tech',
     author_email='tech@texastribune.org',
