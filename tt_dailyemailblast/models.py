@@ -58,6 +58,7 @@ class DailyEmailBlastType(NamedSlugMixin, models.Model):
 class DailyEmailBlast(models.Model):
     blast_type = models.ForeignKey(DailyEmailBlastType, related_name='blasts')
     created_on = models.DateTimeField(auto_now_add=True)
+    subject = models.CharField(max_length=255)
     body = models.TextField()
     recipient_lists = models.ManyToManyField(RecipientList,
             related_name='blasts', editable=False)
