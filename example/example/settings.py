@@ -126,6 +126,8 @@ INSTALLED_APPS = (
 
     # The app with all of the tests and any example customizations
     'example_usage',
+    # For maintaining migrations
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
