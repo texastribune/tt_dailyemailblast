@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models as django_models
+from tinymce.widgets import TinyMCE
 
 from .models import (Recipient, RecipientList, DailyEmailBlast,
         DailyEmailBlastType)
@@ -24,6 +26,10 @@ class RecipientListInline(admin.TabularInline):
 class DailyEmailBlastAdmin(admin.ModelAdmin):
     model = DailyEmailBlast
     inlines = [RecipientListInline]
+    formfield_overrides = {
+        django_models.TextField: {'widget': TinyMCE()},
+    }
+
 
 
 admin.site.register(DailyEmailBlastType)
