@@ -22,7 +22,7 @@ def sync_recipient_list(recipients_list, blast):
 def sync_recipient(recipient, recipients_list, blast):
     html = blast.render(recipient, recipients_list)
     subject = blast.subject
-    bodies = {'html': html}  # TODO: Support plain text rendering
+    bodies = {'html': html, 'text': 'This email requires HTML'}  # TODO: Support plain text rendering
     to = (recipient.email,)
     from_email = settings.TT_DAILYEMAILBLAST_FROMEMAIL
     headers = {}  # ???
