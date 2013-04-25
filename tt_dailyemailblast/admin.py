@@ -42,8 +42,8 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
     def recipients(self, blast):
         return u', '.join([unicode(l) for l in blast.recipient_lists.all()])
 
-    def send_blasts(model_admin, request, qs):
         for blast in qs.filter(sent_on__isnull=True):
+    def send_blasts(self, request, qs):
             blast.sent_on = datetime.datetime.now()
             blast.save()
             blast.send()
