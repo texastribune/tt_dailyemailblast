@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import admin
 from django.db import models as django_models
 from tinymce.widgets import TinyMCE
@@ -8,6 +10,8 @@ from .models import (Recipient, RecipientList, DailyEmailBlast,
 
 def send_blasts(model_admin, request, qs):
     for blast in qs.filter(sent_on__isnull=True):
+        blast.sent_on = datetime.datetime.now()
+        blast.save()
         blast.send()
 
 
