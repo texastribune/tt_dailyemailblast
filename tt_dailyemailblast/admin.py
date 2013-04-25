@@ -7,7 +7,7 @@ from .models import (Recipient, RecipientList, DailyEmailBlast,
 
 
 def send_blasts(model_admin, request, qs):
-    for blast in qs:
+    for blast in qs.filter(sent_on__isnull=True):
         blast.send()
 
 
