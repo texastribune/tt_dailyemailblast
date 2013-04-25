@@ -1,5 +1,3 @@
-import datetime
-
 from armstrong.utils.backends import GenericBackend
 from django.db import models
 from django.template import Context
@@ -78,8 +76,6 @@ class DailyEmailBlast(models.Model):
             'TT_DAILYEMAILBLAST_BLASTBACKEND',
             'tt_dailyemailblast.send_backends.sync.sync_daily_email_blasts',
             self)
-        self.send_completed_on = datetime.datetime.now()
-        self.save()
 
     def render(self, recipient, recipient_list):
         templates = utils.get_template_names(self, recipient_list, recipient)

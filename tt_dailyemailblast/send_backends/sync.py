@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from django.conf import settings
@@ -10,6 +11,9 @@ logger = logging.getLogger(__name__)
 def sync_daily_email_blasts(blast):
     for l in blast.recipient_lists.all():
         l.send(blast)
+
+    blast.send_completed_on = datetime.datetime.now()
+    blast.save()
 
 
 def sync_recipient_list(recipients_list, blast):
