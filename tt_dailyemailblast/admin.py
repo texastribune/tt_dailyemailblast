@@ -1,7 +1,11 @@
 import datetime
 
 from django.contrib import admin
+from django.contrib.options import csrf_protect_m
+from django.contrib.admin.util import unquote
 from django.db import models as django_models
+from django.db import transaction
+from django.http import HttpResponseRedirect
 from tinymce.widgets import TinyMCE
 
 from .models import (Recipient, RecipientList, DailyEmailBlast,
@@ -34,6 +38,24 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
         django_models.TextField: {'widget': TinyMCE()},
     }
     actions = ['send_blasts']
+
+    @csrf_protect_m
+    @transaction.commit_on_success
+    def change_view(self, request, object_id, **kwargs):
+        if request.method == 'POST' and '_senddailyblast' in request.POST:
+            # do actual send
+            blast = self.get_object(request, unquote(object_id))
+            blast.sent_on = datetime.datetime.now()
+            blast.save()
+            blast.send()
+            self.send_message('Blast sent!')
+            if "_popup" in request.REQUEST:
+                return HttpResponseRedirect(request.path + "?_popup=1")
+            else:
+                return HttpResponseRedirect(request.path)
+        else:
+            return super(DailyEmailBlastAdmin, self).change_view(request,
+                    object_id, **kwargs)
 
     def get_queryset(self, request):
         qs = super(DailyEmailBlastAdmin, self).get_queryset()
