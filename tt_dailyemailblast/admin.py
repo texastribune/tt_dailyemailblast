@@ -8,13 +8,6 @@ from .models import (Recipient, RecipientList, DailyEmailBlast,
         DailyEmailBlastType)
 
 
-def send_blasts(model_admin, request, qs):
-    for blast in qs.filter(sent_on__isnull=True):
-        blast.sent_on = datetime.datetime.now()
-        blast.save()
-        blast.send()
-
-
 class RecipientInline(admin.TabularInline):
     model = RecipientList.recipients.through
     verbose_name = 'recipient'
@@ -40,7 +33,7 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
     formfield_overrides = {
         django_models.TextField: {'widget': TinyMCE()},
     }
-    actions = [send_blasts]
+    actions = ['send_blasts']
 
     def get_queryset(self, request):
         qs = super(DailyEmailBlastAdmin, self).get_queryset()
@@ -49,6 +42,11 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
     def recipients(self, blast):
         return u', '.join([unicode(l) for l in blast.recipient_lists.all()])
 
+    def send_blasts(model_admin, request, qs):
+        for blast in qs.filter(sent_on__isnull=True):
+            blast.sent_on = datetime.datetime.now()
+            blast.save()
+            blast.send()
 
 admin.site.register(DailyEmailBlastType)
 admin.site.register(Recipient)
