@@ -31,6 +31,8 @@ class RecipientListInline(admin.TabularInline):
 class DailyEmailBlastAdmin(admin.ModelAdmin):
     model = DailyEmailBlast
     inlines = [RecipientListInline]
+    list_display = ('blast_type', 'created_on', 'sent_on',
+                    'send_completed_on',)
     formfield_overrides = {
         django_models.TextField: {'widget': TinyMCE()},
     }
