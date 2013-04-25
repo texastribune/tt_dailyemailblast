@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib import admin
-from django.contrib.options import csrf_protect_m
+from django.contrib.admin.options import csrf_protect_m
 from django.contrib.admin.util import unquote
 from django.db import models as django_models
 from django.db import transaction
