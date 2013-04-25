@@ -63,6 +63,9 @@ class DailyEmailBlast(models.Model):
     recipient_lists = models.ManyToManyField(RecipientList,
             related_name='blasts', editable=False)
 
+    class Meta:
+        ordering = ('-created_on',)
+
     def __unicode__(self):
         return u'%s (%s)' % (self.blast_type, self.created_on)
 
