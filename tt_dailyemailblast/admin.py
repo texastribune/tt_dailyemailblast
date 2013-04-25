@@ -42,11 +42,21 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
     def recipients(self, blast):
         return u', '.join([unicode(l) for l in blast.recipient_lists.all()])
 
-        for blast in qs.filter(sent_on__isnull=True):
     def send_blasts(self, request, qs):
+        qs = qs.filter(sent_on__isnull=True)
+        number_sent = qs.count()
+        for blast in qs:
             blast.sent_on = datetime.datetime.now()
             blast.save()
             blast.send()
+
+        # Message user with number of blasts sent
+        if number_sent == 1:
+            message = "Sent 1 blast."
+        else:
+            message = "Sent %d blasts" % number_sent
+        self.message_user(request, message)
+
 
 admin.site.register(DailyEmailBlastType)
 admin.site.register(Recipient)
