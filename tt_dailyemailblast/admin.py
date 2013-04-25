@@ -48,7 +48,7 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
             blast.sent_on = datetime.datetime.now()
             blast.save()
             blast.send()
-            self.send_message('Blast sent!')
+            self.message_user(request, 'Blast sent!')
             if "_popup" in request.REQUEST:
                 return HttpResponseRedirect(request.path + "?_popup=1")
             else:
