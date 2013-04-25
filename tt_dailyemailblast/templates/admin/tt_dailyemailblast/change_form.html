@@ -1,0 +1,23 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools %}{{ block.super }}
+  {% if change %}
+    {% if not is_popup %}
+      <script type="text/x-template" id="tt_dailyemailblast_send_button">
+        <a id="_senddailyblast_button" href="#" class="btn">
+          <i class="icon-envelope"></i> {% trans 'Send Now!' %}
+        </a>
+      </script>
+      <script>
+        $(document).ready(function() {
+          $("#actions-right-alt").prepend($("#tt_dailyemailblast_send_button").html());
+          $("#_senddailyblast_button").click(function() {
+            $(this).parents("form").append("<input name='_senddailyblast' type='hidden'>").submit();
+            return false;
+          });
+        });
+      </script>
+    {% endif %}
+  {% endif %}
+{% endblock %}
