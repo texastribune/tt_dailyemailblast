@@ -31,12 +31,19 @@ class RecipientListInline(admin.TabularInline):
 class DailyEmailBlastAdmin(admin.ModelAdmin):
     model = DailyEmailBlast
     inlines = [RecipientListInline]
-    list_display = ('blast_type', 'created_on', 'sent_on',
-                    'send_completed_on',)
+    list_display = ('blast_type', 'recipients',
+                    'created_on', 'sent_on', 'send_completed_on',)
     formfield_overrides = {
         django_models.TextField: {'widget': TinyMCE()},
     }
     actions = [send_blasts]
+
+    def get_queryset(self, request):
+        qs = super(DailyEmailBlastAdmin, self).get_queryset()
+        return qs.prefetch_related('recipient_lists')
+
+    def recipients(self, blast):
+        return u', '.join([unicode(l) for l in blast.recipient_lists.all()])
 
 
 admin.site.register(DailyEmailBlastType)
