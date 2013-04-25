@@ -6,6 +6,11 @@ from .models import (Recipient, RecipientList, DailyEmailBlast,
         DailyEmailBlastType)
 
 
+def send_blasts(model_admin, request, qs):
+    for blast in qs:
+        print blast.send()
+
+
 class RecipientInline(admin.TabularInline):
     model = RecipientList.recipients.through
     verbose_name = 'recipient'
@@ -29,7 +34,7 @@ class DailyEmailBlastAdmin(admin.ModelAdmin):
     formfield_overrides = {
         django_models.TextField: {'widget': TinyMCE()},
     }
-
+    actions = [send_blasts]
 
 
 admin.site.register(DailyEmailBlastType)
