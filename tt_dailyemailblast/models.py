@@ -62,6 +62,11 @@ class DailyEmailBlast(models.Model):
     body = models.TextField()
     recipient_lists = models.ManyToManyField(RecipientList,
             related_name='blasts', editable=False)
+    sent_on = models.DateTimeField(null=True)
+    send_completed_on = models.DateTimeField(null=True)
+
+    class Meta:
+        ordering = ('-created_on',)
 
     def __unicode__(self):
         return u'%s (%s)' % (self.blast_type, self.created_on)
