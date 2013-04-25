@@ -8,7 +8,7 @@ from .models import (Recipient, RecipientList, DailyEmailBlast,
 
 def send_blasts(model_admin, request, qs):
     for blast in qs:
-        print blast.send()
+        blast.send()
 
 
 class RecipientInline(admin.TabularInline):
