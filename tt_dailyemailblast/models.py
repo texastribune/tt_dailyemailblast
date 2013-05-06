@@ -50,6 +50,7 @@ class RecipientList(NamedSlugMixin, models.Model):
 
 class DailyEmailBlastType(NamedSlugMixin, models.Model):
     name = models.CharField(max_length=255)
+    footer = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name
