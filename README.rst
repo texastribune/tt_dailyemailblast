@@ -53,7 +53,31 @@ To use async Celery workers to send, add::
 
 Usage
 -----
-*TODO*
+
+Templates
+~~~~~~~~~
+Your templates should render to html. The context will get these variables:
+
+* ``{{ blast }}`` - The ``DailyEmailBlast`` object.
+* ``{{ recipient }}`` - The ``Recipient`` object.
+* ``{{ recipient_list }}`` - The ``RecipientList`` object.
+
+Context Backend
+~~~~~~~~~~~~~~~
+Your context backend should take the arguments:
+
+* ``blast``
+* ``recipient``
+* ``recipient_list``
+
+And should be patterened after this basic example::
+
+    from tt_dailyemailblast.context_backends import basic
+
+    def context_backend(blast, recipient, recipient_list):
+        context = basic(blast, recipient, recipient_list)
+        # modify context
+        return context
 
 
 Example
