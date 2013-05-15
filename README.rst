@@ -13,17 +13,13 @@ Simple application for handling our daily emails to partners.
 
 Installation & Configuration
 ----------------------------
-You can install this using `pip`_ like this:
-
-::
+You can install this using `pip`_ like this::
 
     pip install tt_dailyemailblast
 
 Once installed, you need to add it to your ``INSTALLED_APPS``.  You can do that
 however you like or you can copy-and-paste this in after your
-``INSTALLED_APPS`` are defined.
-
-::
+``INSTALLED_APPS`` are defined::
 
     INSTALLED_APPS += ['tt_dailyemailblast', ]
 
