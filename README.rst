@@ -23,8 +23,6 @@ however you like or you can copy-and-paste this in after your
 
     INSTALLED_APPS += ['tt_dailyemailblast', ]
 
-Now you're ready to start using ``tt_dailyemailblast``.
-
 
 Usage
 -----
