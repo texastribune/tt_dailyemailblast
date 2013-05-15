@@ -23,6 +23,33 @@ however you like or you can copy-and-paste this in after your
 
     INSTALLED_APPS += ['tt_dailyemailblast', ]
 
+The next setting to configure is the **from** email address::
+
+    TT_DAILYEMAILBLAST_FROMEMAIL = 'no-reply@texastribune.org'
+
+``tt_dailyemailblast`` can accept any backend to suit your integration needs.
+
+To send an email, you'll need a template for the **body**.
+``tt_dailyemailblast`` will look for templates in your project in this order:
+
+1. ``tt_dailyemailblast/<blast_type>/<recipient_list>/<recipient>.html``
+2. ``tt_dailyemailblast/<blast_type>/<recipient_list>.html``
+3. ``tt_dailyemailblast/<blast_type>.html``
+
+If you need special context generated in that template, you can specify that
+with the context backend setting::
+
+    TT_DAILYEMAILBLAST_CONTEXT = 'tt.dailyemailblast.context_backend'
+
+Finally, to actually send emails, ``tt_dailyemailblast`` will use the sync
+backend by default. You can explicitly specify that with the setting::
+
+    from tt_dailyemailblast.settings.sync import *
+
+To use async Celery workers to send, add::
+
+    from tt_dailyemailblast.settings.async import *
+
 
 Usage
 -----
