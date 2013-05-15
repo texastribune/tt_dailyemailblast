@@ -80,6 +80,21 @@ And should be patterened after this basic example::
         return context
 
 
+Testing
+-------
+
+Testing is so easy! A one-armed driving bear could do it! Just follow these
+steps:
+
+1. Create a recipient list with only your email address
+2. Create a blast
+3. Make sure the blast has a template that will render
+4. Fill in the ``Sent on`` and ``Sent completed on`` fields even though the
+   blast has not been sent yet
+5. Save the blast
+6. Install ``pops``
+7. Send the blast from the 'Send Now!' button
+
 Example
 -------
 All of the usage is outlined, along with tests inside the ``example``
