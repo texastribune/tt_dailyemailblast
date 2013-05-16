@@ -4,13 +4,13 @@ Simple application for handling our daily emails to partners.
 
 .. note::
 
-  This could be a *lot* more complex and do all manner of
-  awesome stuff like auto-generating the body based on stories that
-  are in the CMS.  That's so much bigger than we need right now.
+    This could be a *lot* more complex and do all manner of
+    awesome stuff like auto-generating the body based on stories that
+    are in the CMS.  That's so much bigger than we need right now.
 
-  This is definitely in the "works for what we need" camp, feel free
-  to use it as an example of sending emails out using Celery, but
-  probably not something to actually use.
+    This is definitely in the "works for what we need" camp, feel free
+    to use it as an example of sending emails out using Celery, but
+    probably not something to actually use.
 
 
 Installation & Configuration
