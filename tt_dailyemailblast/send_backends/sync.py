@@ -18,7 +18,7 @@ def sync_daily_email_blasts(blast):
 
 def sync_recipient_list(recipients_list, blast):
     for r in recipients_list.recipients.all():
-        logger.error('sync_recipient_list: %s %s %s' % (blast, recipients_list,
+        logger.debug('sync_recipient_list: %s %s %s' % (blast, recipients_list,
                 r))
         r.send(recipients_list, blast)
 
